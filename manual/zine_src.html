@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>SpaceTrader Manual</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=block">
+<style>
+@page{size:5.5in 8.5in;margin:0.5in 0.45in 0.55in 0.45in;
+  @bottom-center{content:counter(page);font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#565c53}}
+@page cover{margin:0;@bottom-center{content:none}}
+@page back{margin:0.45in;@bottom-center{content:none}}
+:root{--paper:#fff;--ink:#1c1f1b;--muted:#565c53;--rule:#c9ccc2;--panel:#eceee7;--accent:#1d3fb8;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Source Serif 4",Georgia,serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:9.4pt;line-height:1.42;hyphens:auto}
+p{margin:0 0 6pt;orphans:3;widows:3}
+ul,ol{margin:0 0 7pt;padding-left:1.15em}
+li{margin-bottom:2.5pt}
+h2{font-family:var(--display);font-weight:700;font-size:21pt;line-height:1;text-transform:uppercase;margin:0 0 8pt;padding-bottom:4pt;border-bottom:2pt solid var(--ink);display:flex;gap:8pt;align-items:baseline;break-after:avoid}
+h2 .n{font-family:var(--mono);font-size:8.5pt;font-weight:500;color:var(--accent)}
+h3{font-family:var(--display);font-weight:600;font-size:12.5pt;text-transform:uppercase;letter-spacing:.02em;margin:10pt 0 4pt;break-after:avoid}
+section{break-before:page}
+section.cont{break-before:auto;margin-top:16pt}
+code,.mono{font-family:var(--mono);font-size:.84em}
+code{background:var(--panel);padding:0 2.5pt;border-radius:2pt}
+kbd{font-family:var(--mono);font-size:.8em;background:#fbfbf8;border:.6pt solid #a9ada2;border-bottom-width:1.6pt;border-radius:2.5pt;padding:0 2.5pt;white-space:nowrap}
+table{border-collapse:collapse;width:100%;font-size:8.4pt;line-height:1.3;margin:2pt 0 8pt;border-top:1.2pt solid var(--ink);break-inside:auto}
+tr{break-inside:avoid}
+th,td{text-align:left;padding:3pt 5pt 3pt 0;border-bottom:.5pt solid var(--rule);vertical-align:top}
+th{font-family:var(--mono);font-size:6.5pt;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+td.k{white-space:nowrap}
+.note{background:var(--panel);padding:6pt 8pt;margin:6pt 0 8pt;font-size:8.8pt;break-inside:avoid}
+.note b:first-child{display:block;font-family:var(--mono);font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:1pt}
+.shot{background:#000;padding:4pt;margin:4pt 0 8pt;break-inside:avoid}
+.shot img{display:block;width:100%;height:auto;image-rendering:pixelated}
+.shot figcaption{font-family:var(--mono);font-size:6.8pt;line-height:1.35;color:#c4c8bd;margin-top:3pt}
+figure{margin:0}
+.small-shot{width:72%;margin-left:auto;margin-right:auto}
+.icon{width:15pt;height:15pt;display:block;flex:none;border:.5pt solid var(--rule)}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:5pt 10pt;margin:4pt 0 8pt}
+.legend div{display:flex;gap:6pt;align-items:center;font-size:8.6pt;line-height:1.2}
+.legend small{display:block;color:var(--muted);font-size:7.4pt}
+.unitname{display:flex;gap:5pt;align-items:center;font-weight:600}
+.compass{display:grid;grid-template-columns:repeat(3,24pt);grid-template-rows:repeat(3,24pt);gap:2.5pt;flex:none}
+.compass div{display:grid;place-items:center;font-family:var(--mono);font-size:11pt;font-weight:500;background:#fbfbf8;border:.6pt solid #a9ada2;border-bottom-width:1.8pt;border-radius:3pt}
+.compass .c{background:none;border:none;font-size:6.5pt;color:var(--muted)}
+.compass-row{display:flex;gap:12pt;align-items:center;margin:4pt 0 8pt}
+.compass-row p{margin:0 0 4pt}
+
+/* cover */
+.cover{page:cover;height:8.5in;background:#0000cd;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:0.55in 0.45in 0.45in}
+.cover .eyebrow{font-family:var(--mono);font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:#cdcd00}
+.cover h1{font-family:var(--display);font-weight:700;font-size:78pt;line-height:.86;margin:6pt 0 4pt;text-transform:uppercase;letter-spacing:.01em}
+.cover .sub{font-family:var(--display);font-weight:500;font-size:17pt;text-transform:uppercase;letter-spacing:.06em;color:#cdcdcd;margin-bottom:14pt}
+.cover .lede{font-size:10.5pt;line-height:1.45;max-width:30em;margin-bottom:16pt}
+.cover .shot{margin-top:auto;border:1.5pt solid #cdcd00}
+.cover .foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7pt;color:#cdcdcd;margin-top:8pt}
+.cover .site{font-family:var(--mono);font-size:6.5pt;letter-spacing:.1em;text-align:center;margin-top:10pt}
+.cover .site a{color:#cdcd00;text-decoration:none}
+
+/* contents */
+.toc{list-style:none;padding:0;margin:0 0 10pt;border-top:1.2pt solid var(--ink)}
+.toc li{display:flex;gap:8pt;align-items:baseline;border-bottom:.5pt solid var(--rule);padding:3.5pt 0;margin:0;font-family:var(--display);font-weight:600;font-size:12pt}
+.toc .n{font-family:var(--mono);font-size:7.5pt;color:var(--accent);min-width:14pt;font-weight:500}
+.toc .pg{margin-left:auto;font-family:var(--mono);font-size:8pt;font-weight:400;color:var(--muted)}
+
+/* back cover quick ref */
+.back{page:back;break-before:page}
+.back h2{font-size:18pt}
+.qr{display:grid;grid-template-columns:1fr 1fr;gap:0 12pt}
+.qr table{font-size:7.9pt}
+.inside{break-before:page;display:flex;flex-direction:column;height:7.4in}
+.inside .shot{margin-top:.2in}
+.credits{margin-top:auto;font-size:8.6pt;border-top:1.2pt solid var(--ink);padding-top:8pt}
+.credits .mono{font-size:7.2pt;color:var(--muted)}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:8pt}
+.gal .shot{margin:0}
+table.log td{height:24pt}
+.toc li{padding:3pt 0}
+.colophon{margin-top:10pt;font-size:7.6pt;color:var(--muted);line-height:1.4}
+
+/* optional: painted cover art instead of a screenshot - see .art-cover below */
+.cover.art-cover{background:#000;padding:0}
+.cover.art-cover .bg{position:absolute;inset:0;margin:0}
+.cover.art-cover .bg img{width:100%;height:100%;object-fit:cover;display:block}
+.cover.art-cover .top{position:relative;padding:0.5in 0.45in 1.1in;background:linear-gradient(#000e 0%,#000b 55%,#0000 100%)}
+.cover.art-cover .bottom{position:relative;margin-top:auto;padding:0.9in 0.45in 0.4in;background:linear-gradient(#0000 0%,#000c 45%,#000e 100%)}
+.cover.art-cover .foot{margin-top:0}
+.cover.art-cover .lede{margin-bottom:10pt}
+/* optional: spoilers printed upside down (wrap the content, not the h2) */
+.flip{transform:rotate(180deg)}
+/* optional: a dotted page for players to draw a map on */
+.dots{height:6.3in;margin-top:6pt;background-image:radial-gradient(circle,#9aa092 0.7pt,transparent 0.8pt);background-size:0.25in 0.25in;background-position:center;border-top:1.2pt solid var(--ink)}
+.sectormap{font-family:var(--mono);font-size:6.6pt;line-height:1.35;white-space:pre;background:#f0f0ea;border:0.5pt solid #bbb;padding:5pt 6pt;margin:6pt 0}
+</style></head><body>
+
+<div class="cover">
+  <div class="eyebrow">Timex/Sinclair 2068 · David Anderson · 2026</div>
+  <h1>Space&shy;Trader</h1>
+  <div class="sub">Manual</div>
+  <p class="lede">You own a free trader and owe the bank twenty thousand credits for her. Buy low, sell high, and stay ahead of the payments. The cargo that pays best is the cargo customs are looking for.</p>
+  <figure class="shot">{{img:market}}</figure>
+  <div class="foot"><span>1 player · keyboard</span><span>First edition, 2026</span></div>
+  <div class="site"><a href="https://timexsinclair.com">timexsinclair.com</a></div>
+</div>
+
+<section class="inside">
+  <figure class="shot">{{img:title}}<figcaption>The title screen.</figcaption></figure>
+  <div class="credits">
+    <p><strong>SpaceTrader</strong> © 2026 David Anderson. Written with Claude (Anthropic). Released under the MIT license.</p>
+    <p>Source, tools and build scripts at github.com/factus10/SpaceTrader. The setting takes its shape from the <em>Traveller</em> role-playing game, whose free traders are also mortgaged.</p>
+    <p class="mono">Sinclair BASIC + Z80. Code at 49152, data at 50176, font at 53248. Runs entirely in Extended Color Mode. CLEAR 49151 before loading.</p>
+  </div>
+</section>
+
+<section id="s-contents">
+  <h2>Contents</h2>
+  <ol class="toc">
+    <li><span class="n">01</span>Loading<a class="pg" href="#loading"></a></li>
+    <li><span class="n">02</span>The screen<a class="pg" href="#screen"></a></li>
+    <li><span class="n">03</span>Trading<a class="pg" href="#trading"></a></li>
+    <li><span class="n">04</span>The sector<a class="pg" href="#sector"></a></li>
+    <li><span class="n">05</span>Contraband<a class="pg" href="#contraband"></a></li>
+    <li><span class="n">06</span>Heat<a class="pg" href="#heat"></a></li>
+    <li><span class="n">07</span>Customs<a class="pg" href="#customs"></a></li>
+    <li><span class="n">08</span>Pirates and patrols<a class="pg" href="#pirates"></a></li>
+    <li><span class="n">09</span>Port services<a class="pg" href="#port"></a></li>
+    <li><span class="n">10</span>The mortgage, and the end<a class="pg" href="#mortgage"></a></li>
+    <li><span class="n">11</span>Tips<a class="pg" href="#tips"></a></li>
+  </ol>
+</section>
+
+<section id="loading">
+  <h2><span class="n">01</span>Loading the program</h2>
+  <p>One TAP file of about 110K: the BASIC program, machine code, data, a font, the title screen and twenty system pictures.</p>
+  <ol>
+    <li>Set the machine to <strong>TS2068</strong> or <strong>TC2068</strong>.</li>
+    <li>Open <code>spacetrader.tap</code>.</li>
+    <li>Type <kbd>LOAD ""</kbd> and press <kbd>ENTER</kbd>.</li>
+  </ol>
+  <p>It starts itself. Press a key at the title, then name your ship. <kbd>ENTER</kbd> alone names her <em>Beowulf</em>.</p>
+  <div class="note"><b>Leave fast loading on</b>The program pulls blocks off the tape as it runs, including a picture for every system you visit.</div>
+  <div class="note"><b>Don't use RUN</b>It starts without reserving the memory the program needs. Let it start itself, or <kbd>GO TO 40</kbd>.</div>
+  <figure class="shot small-shot">{{img:naming}}<figcaption>Naming the ship.</figcaption></figure>
+</section>
+
+<section id="screen">
+  <h2><span class="n">02</span>The screen</h2>
+  <p>The top third is the world you are docked at; it changes when you jump. Below it the market, headed with the system's name, <strong>tech level</strong> and <strong>law level</strong> — the two numbers that decide what things cost and how much trouble you are in.</p>
+  <table>
+    <tr><th>Mark</th><th>Means</th><th class="num">Price</th></tr>
+    <tr><td class="k"><code>EX</code></td><td>Port exports it</td><td class="num">−30%</td></tr>
+    <tr><td class="k"><code>IM</code></td><td>Port imports it</td><td class="num">+40%</td></tr>
+    <tr><td class="k"><code>--</code></td><td>Neither</td><td class="num">—</td></tr>
+  </table>
+  <p>An exclamation mark means that good is <strong>contraband here</strong>. The bottom line is always credits, fuel, hull and heat.</p>
+  <p>Menu keys show in yellow — press that letter. A message takes the menu's place and shows in reverse; any key clears it.</p>
+  <figure class="shot small-shot">{{img:market}}<figcaption>The market at Coriolis Gate.</figcaption></figure>
+</section>
+
+<section id="trading">
+  <h2><span class="n">03</span>Trading</h2>
+  <p>Buy where a good is exported, sell where it is imported. That is the whole engine.</p>
+  <p>Population and tech level shift the price too, and on top of that a swing of up to 15% either way, <strong>rolled afresh every time you dock</strong>. A bad price is worth coming back for. The hold takes <strong>twenty tons</strong>.</p>
+  <table>
+    <tr><th>Good</th><th class="num">Base</th><th class="num">Illegal above law</th></tr>
+    <tr><td>1 Foodstuffs</td><td class="num">20</td><td class="num">—</td></tr>
+    <tr><td>2 Ore</td><td class="num">35</td><td class="num">—</td></tr>
+    <tr><td>3 Textiles</td><td class="num">45</td><td class="num">—</td></tr>
+    <tr><td>4 Medical</td><td class="num">90</td><td class="num">7</td></tr>
+    <tr><td>5 Electronics</td><td class="num">140</td><td class="num">6</td></tr>
+    <tr><td>6 Weapons</td><td class="num">180</td><td class="num">4</td></tr>
+    <tr><td>7 Machinery</td><td class="num">110</td><td class="num">—</td></tr>
+    <tr><td>8 Luxuries</td><td class="num">250</td><td class="num">5</td></tr>
+  </table>
+  <p>The richest single jump is luxuries from Ambergris into Junction Nine, about 3,400 credits on a full hold. A typical good run pays 1,200.</p>
+</section>
+
+<section id="sector">
+  <h2><span class="n">04</span>The sector</h2>
+  <p>Twenty systems. You can jump <strong>within two columns and two rows</strong>, so two squares diagonally is still one jump. Fuel is one ton plus one per two squares — one to three a jump, from a tank of eight.</p>
+  <p>Core to frontier runs left to right. The core is cheap fuel, cheap repairs and inspectors everywhere. The frontier is the reverse: nothing legal is worth much, nothing is illegal, and the pirates know it.</p>
+  <p>Ossuary and Vagrant are six jumps out, and <strong>Ossuary connects only through Kalideen</strong>.</p>
+<pre class="sectormap">      CORE &lt;---------------&gt; FRONTIER
+
+        1  2  3  4  5  6  7  8  9 10 11 12 13
+ 2      ·  ·  3  ·  9  ·  ·  ·  ·  · 20  ·  ·
+ 3      ·  ·  ·  ·  · 11  ·  · 15  ·  ·  · 17
+ 4      ·  1  ·  ·  6  ·  ·  ·  ·  ·  ·  ·  ·
+ 5      ·  ·  · 12  ·  · 10  ·  · 14  ·  ·  ·
+ 6      2  ·  5  ·  ·  ·  ·  ·  ·  ·  · 16  ·
+ 7      ·  ·  ·  7  ·  ·  · 13 18  ·  ·  ·  ·
+ 8      ·  4  ·  ·  ·  8  ·  ·  ·  · 19  ·  ·
+</pre>
+  <div class="note"><b>No refuelling in deep space</b>Check the tank before a long leg. Stranded with an empty hold and no credits ends the game.</div>
+</section>
+
+<section id="s-systems" class="cont">
+  <h3>The twenty systems</h3>
+  <table>
+    <tr><th class="num">#</th><th>System</th><th class="num">TL</th><th class="num">Law</th><th>Exports</th></tr>
+    <tr><td class="num">1</td><td>Coriolis Gate</td><td class="num">15</td><td class="num">8</td><td>Elec Mach</td></tr>
+    <tr><td class="num">2</td><td>Meridian</td><td class="num">14</td><td class="num">9</td><td>Med Elec</td></tr>
+    <tr><td class="num">3</td><td>Verity</td><td class="num">14</td><td class="num">7</td><td>Mach Elec</td></tr>
+    <tr><td class="num">4</td><td>Tessellate</td><td class="num">13</td><td class="num">6</td><td>Lux</td></tr>
+    <tr><td class="num">5</td><td>Aldebar Prime</td><td class="num">13</td><td class="num">6</td><td>Elec Weap Mach</td></tr>
+    <tr><td class="num">6</td><td>Junction Nine</td><td class="num">10</td><td class="num">5</td><td>Mach</td></tr>
+    <tr><td class="num">7</td><td>Hollow Sky</td><td class="num">8</td><td class="num">4</td><td>Food Text</td></tr>
+    <tr><td class="num">8</td><td>Kestrel</td><td class="num">9</td><td class="num">5</td><td>Food</td></tr>
+    <tr><td class="num">9</td><td>Ambergris</td><td class="num">11</td><td class="num">4</td><td>Lux Text</td></tr>
+    <tr><td class="num">10</td><td>Tannhauser</td><td class="num">11</td><td class="num">5</td><td>Elec Mach</td></tr>
+    <tr><td class="num">11</td><td>Fenwick</td><td class="num">8</td><td class="num">3</td><td>Ore</td></tr>
+    <tr><td class="num">12</td><td>Pellucid</td><td class="num">12</td><td class="num">6</td><td>Med Elec</td></tr>
+    <tr><td class="num">13</td><td>Sable Run</td><td class="num">9</td><td class="num">3</td><td>Text</td></tr>
+    <tr><td class="num">14</td><td>Rust Harbour</td><td class="num">6</td><td class="num">1</td><td>Ore Weap</td></tr>
+    <tr><td class="num">15</td><td>Cinder</td><td class="num">5</td><td class="num">2</td><td>Ore</td></tr>
+    <tr><td class="num">16</td><td>Vagrant</td><td class="num">6</td><td class="num">0</td><td>Weap Lux</td></tr>
+    <tr><td class="num">17</td><td>Ossuary</td><td class="num">4</td><td class="num">1</td><td>Ore Weap</td></tr>
+    <tr><td class="num">18</td><td>Longshot</td><td class="num">5</td><td class="num">2</td><td>Ore Food</td></tr>
+    <tr><td class="num">19</td><td>Threadbare</td><td class="num">4</td><td class="num">3</td><td>Food Text</td></tr>
+    <tr><td class="num">20</td><td>Kalideen</td><td class="num">7</td><td class="num">2</td><td>Ore Text</td></tr>
+  </table>
+</section>
+
+<section id="contraband">
+  <h2><span class="n">05</span>Contraband and licenses</h2>
+  <p>Four goods are restricted. A good is contraband anywhere whose law level is <em>above</em> its threshold.</p>
+  <table>
+    <tr><th>Good</th><th class="num">Above law</th><th class="num">Illegal in</th><th class="num">License</th></tr>
+    <tr><td>Weapons</td><td class="num">4</td><td class="num">9/20</td><td class="num">1,440</td></tr>
+    <tr><td>Luxuries</td><td class="num">5</td><td class="num">6/20</td><td class="num">2,000</td></tr>
+    <tr><td>Electronics</td><td class="num">6</td><td class="num">3/20</td><td class="num">1,120</td></tr>
+    <tr><td>Medical</td><td class="num">7</td><td class="num">2/20</td><td class="num">720</td></tr>
+  </table>
+  <p>Buying contraband adds 2 heat. A <strong>license</strong>, bought at any port, stops that good being contraband for you anywhere — the exclamation mark goes and customs stop caring.</p>
+  <div class="note"><b>Which first</b>Weapons is illegal in nine systems and costs 1,440. One core inspection costs more than the license.</div>
+</section>
+
+<section id="heat">
+  <h2><span class="n">06</span>Heat</h2>
+  <p>Heat is official attention, and it makes three things worse at once: customs inspect you more often, pirates find you more often, and bribes stop working.</p>
+  <table>
+    <tr><th>What you do</th><th class="num">Heat</th></tr>
+    <tr><td>Buy a ton of contraband</td><td class="num">+2</td></tr>
+    <tr><td>Surrender cargo</td><td class="num">+1</td></tr>
+    <tr><td>Pay a fine</td><td class="num">+4</td></tr>
+    <tr><td>Bribe refused</td><td class="num">+8</td></tr>
+    <tr><td>Resist inspection</td><td class="num">+15</td></tr>
+    <tr><td>Every jump</td><td class="num">−1</td></tr>
+  </table>
+  <p>There is no way to pay heat off. The only cure is time: jump, trade clean, let it fall. A run of quiet jumps is worth making <em>before</em> a smuggling trip, not after.</p>
+</section>
+
+<section id="customs">
+  <h2><span class="n">07</span>Customs</h2>
+  <p>You are inspected on arrival, and sometimes stopped in transit. The chance is the world's law level plus a fifth of your heat, never above 70%. Transit stops are half as likely.</p>
+  <table>
+    <tr><th>Where</th><th class="num">Base</th></tr>
+    <tr><td>Frontier, law 0–2</td><td class="num">10%</td></tr>
+    <tr><td>Middle, law 3–5</td><td class="num">25%</td></tr>
+    <tr><td>Core, law 6+</td><td class="num">45%</td></tr>
+  </table>
+  <table>
+    <tr><th>Key</th><th>Choice</th><th>Costs</th></tr>
+    <tr><td class="k"><kbd>C</kbd></td><td>Comply</td><td>40/ton, the cargo, 4 heat</td></tr>
+    <tr><td class="k"><kbd>B</kbd></td><td>Bribe</td><td>70% less heat, min 20%. Fails: double fine, cargo, 8 heat</td></tr>
+    <tr><td class="k"><kbd>S</kbd></td><td>Surrender</td><td>The cargo, 1 heat. No fine</td></tr>
+    <tr><td class="k"><kbd>R</kbd></td><td>Resist</td><td>Fight a cutter, 15 heat either way</td></tr>
+  </table>
+  <p>Surrender when caught cold — you lose the goods anyway, and it is the fine and the heat that hurt.</p>
+</section>
+
+<section id="pirates">
+  <h2><span class="n">08</span>Pirates and patrols</h2>
+  <p>Every jump rolls against the law level of where you are going. Heat is added to both chances.</p>
+  <table>
+    <tr><th>Destination</th><th class="num">Pirate</th><th class="num">Patrol</th><th class="num">Offer</th></tr>
+    <tr><td>Frontier, 0–2</td><td class="num">25%</td><td class="num">2%</td><td class="num">15%</td></tr>
+    <tr><td>Middle, 3–5</td><td class="num">12%</td><td class="num">8%</td><td class="num">15%</td></tr>
+    <tr><td>Core, 6+</td><td class="num">3%</td><td class="num">20%</td><td class="num">12%</td></tr>
+  </table>
+  <p>An offer is a cargo contract worth 50 to 200 credits, paid on the spot. Nobody kills you outright: a fight costs cargo and hull, and the run ends only if the hull reaches zero.</p>
+  <table>
+    <tr><th>Key</th><th>Choice</th><th>Odds</th></tr>
+    <tr><td class="k"><kbd>E</kbd></td><td>Evade</td><td>50% + 3 per ton of fuel</td></tr>
+    <tr><td class="k"><kbd>F</kbd></td><td>Fight</td><td>Hull vs hull, each + d6</td></tr>
+    <tr><td class="k"><kbd>B</kbd></td><td>Bribe</td><td>200 cr, 60% less heat, min 15%</td></tr>
+    <tr><td class="k"><kbd>R</kbd></td><td>Run</td><td>As evade</td></tr>
+  </table>
+  <div class="note"><b>Fuel is armour</b>A full tank escapes three times in four; a dry one about half — and cannot jump away afterwards.</div>
+  <figure class="shot small-shot">{{img:combat}}<figcaption>A pirate off Rust Harbour.</figcaption></figure>
+</section>
+
+<section id="port">
+  <h2><span class="n">09</span>Port services</h2>
+  <p>Press <kbd>P</kbd> at the market. The screen is headed with your ship's name.</p>
+  <table>
+    <tr><th>Key</th><th>Buys</th></tr>
+    <tr><td class="k"><kbd>F</kbd></td><td>One ton of fuel</td></tr>
+    <tr><td class="k"><kbd>A</kbd></td><td>Fuel until full or broke</td></tr>
+    <tr><td class="k"><kbd>H</kbd></td><td>One point of hull</td></tr>
+    <tr><td class="k"><kbd>L</kbd></td><td>Trade licenses</td></tr>
+    <tr><td class="k"><kbd>M</kbd></td><td>1,000 off the mortgage</td></tr>
+    <tr><td class="k"><kbd>X</kbd></td><td>Back to the market</td></tr>
+  </table>
+  <p>Tank and hull both hold eight. Technology sets the price:</p>
+  <table>
+    <tr><th>Tech level</th><th class="num">Fuel</th><th class="num">Hull</th></tr>
+    <tr><td>15, core</td><td class="num">10</td><td class="num">40</td></tr>
+    <tr><td>9, middle</td><td class="num">22</td><td class="num">64</td></tr>
+    <tr><td>4, frontier</td><td class="num">32</td><td class="num">84</td></tr>
+  </table>
+  <figure class="shot small-shot">{{img:port}}<figcaption>Port services.</figcaption></figure>
+</section>
+
+<section id="mortgage">
+  <h2><span class="n">10</span>The mortgage, and the end</h2>
+  <p>You start owing <strong>20,000 credits</strong>. Every eight jumps <strong>800</strong> falls due and is taken automatically if you have it. The port screen shows the balance and the jumps remaining.</p>
+  <p>Miss one and you are warned. <strong>Miss two and the ship is repossessed.</strong></p>
+  <p>The minimum alone takes two hundred jumps. Paying down the principal with <kbd>M</kbd> after a good run clears it in a handful. The minimum keeps you flying; the profits buy you out.</p>
+  <div class="note"><b>Keep 800 in hand</b>Going into the eighth jump broke is how most ships are lost — not to pirates, but to the bank.</div>
+</section>
+
+<section id="ending" class="cont">
+  <h3>Winning and losing</h3>
+  <p>Clear the debt and the ship is yours. That is the only way to win.</p>
+  <h3>Three ways to lose</h3>
+  <ul>
+    <li><strong>Hull reaches zero</strong> in a fight.</li>
+    <li><strong>Two missed payments</strong> and the bank takes her.</li>
+    <li><strong>Stranded</strong> — no fuel, nothing to sell, and not enough credits for a single ton.</li>
+  </ul>
+  <p>The third is the quiet one. Nothing warns you.</p>
+</section>
+
+<section id="tips">
+  <h2><span class="n">11</span>Tips</h2>
+  <ul>
+    <li><strong>Run the core first.</strong> Electronics and machinery out of Coriolis Gate, Verity and Tannhauser pay well and legally, and the core is almost free of pirates.</li>
+    <li><strong>Buy the weapons license before the weapons.</strong> One core inspection costs more than the license did.</li>
+    <li><strong>Watch the market, not the good.</strong> Prices reroll every docking; a 15% swing can beat choosing a different cargo.</li>
+    <li><strong>Fill the tank before a frontier run.</strong> Fuel is cheapest in the core, it is your escape chance, and there is none out there.</li>
+    <li><strong>Let heat fall before the big trip.</strong> It is added to the pirate chance <em>and</em> the inspection chance <em>and</em> taken off your bribe odds.</li>
+    <li><strong>Surrender rather than bribe when hot.</strong> At 30 heat a bribe is 40% nothing against 60% double fine and 8 more heat.</li>
+    <li><strong>Pay the principal when you can.</strong> A thousand off the debt beats a thousand in the account, because the account is what fines and pirates take.</li>
+  </ul>
+</section>
+
+<div class="back">
+  <h2>Quick reference</h2>
+  <div class="qr">
+    <table>
+      <tr><th colspan="2">At the market</th></tr>
+      <tr><td class="k"><kbd>B</kbd></td><td>Buy</td></tr>
+      <tr><td class="k"><kbd>S</kbd></td><td>Sell</td></tr>
+      <tr><td class="k"><kbd>J</kbd></td><td>Jump</td></tr>
+      <tr><td class="k"><kbd>P</kbd></td><td>Port</td></tr>
+      <tr><th colspan="2">At the port</th></tr>
+      <tr><td class="k"><kbd>F</kbd></td><td>Fuel, one ton</td></tr>
+      <tr><td class="k"><kbd>A</kbd></td><td>Fill the tank</td></tr>
+      <tr><td class="k"><kbd>H</kbd></td><td>Hull, one point</td></tr>
+      <tr><td class="k"><kbd>L</kbd></td><td>Licenses</td></tr>
+      <tr><td class="k"><kbd>M</kbd></td><td>Pay 1,000</td></tr>
+      <tr><td class="k"><kbd>X</kbd></td><td>Back</td></tr>
+    </table>
+    <table>
+      <tr><th colspan="2">Inspected</th></tr>
+      <tr><td class="k"><kbd>C</kbd></td><td>Comply</td></tr>
+      <tr><td class="k"><kbd>B</kbd></td><td>Bribe</td></tr>
+      <tr><td class="k"><kbd>S</kbd></td><td>Surrender</td></tr>
+      <tr><td class="k"><kbd>R</kbd></td><td>Resist</td></tr>
+      <tr><th colspan="2">Attacked</th></tr>
+      <tr><td class="k"><kbd>E</kbd></td><td>Evade</td></tr>
+      <tr><td class="k"><kbd>F</kbd></td><td>Fight</td></tr>
+      <tr><td class="k"><kbd>B</kbd></td><td>Bribe</td></tr>
+      <tr><td class="k"><kbd>R</kbd></td><td>Run</td></tr>
+      <tr><th colspan="2">The numbers</th></tr>
+      <tr><td class="k">20</td><td>tons of hold</td></tr>
+      <tr><td class="k">8</td><td>fuel, hull</td></tr>
+      <tr><td class="k">800</td><td>due every 8 jumps</td></tr>
+      <tr><td class="k">20,000</td><td>to pay off</td></tr>
+    </table>
+  </div>
+  <p class="site"><a href="https://timexsinclair.com">timexsinclair.com</a></p>
+</div>

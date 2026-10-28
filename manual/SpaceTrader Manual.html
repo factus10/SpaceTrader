@@ -1,0 +1,397 @@
+<title>SpaceTrader Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+:root{
+  --paper:#f2f3ee; --panel:#e6e8e0; --ink:#1c1f1b; --muted:#565c53; --rule:#c9ccc2;
+  --sea:#1d3fb8; --land:#1f8a2e; --yel:#b88a00; --red:#b3261e; --accent:#1d3fb8;
+  --code-bg:#e3e6dc; --key-bg:#fbfbf8;
+  --shot-bg:#000;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#15171a; --panel:#1f2226; --ink:#e7e8e3; --muted:#a3a89f; --rule:#34383d;
+    --sea:#7f9bff; --land:#5ccb6a; --yel:#e3b92c; --red:#ff7a70; --accent:#8aa4ff;
+    --code-bg:#23272c; --key-bg:#2a2e33;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#15171a; --panel:#1f2226; --ink:#e7e8e3; --muted:#a3a89f; --rule:#34383d;
+  --sea:#7f9bff; --land:#5ccb6a; --yel:#e3b92c; --red:#ff7a70; --accent:#8aa4ff;
+  --code-bg:#23272c; --key-bg:#2a2e33;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:1060px;margin:0 auto}
+header.cover{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:48px 40px;border-bottom:3px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(56px,9vw,104px);line-height:.9;letter-spacing:.01em;margin:.25em 0 .2em;text-transform:uppercase}
+.lede{font-size:19px;max-width:34em;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.site{margin:14px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em}
+.site a{color:var(--muted);text-decoration:none;border-bottom:1px solid currentColor}
+.site a:hover{color:var(--ink)}
+.shot{background:var(--shot-bg);border:1px solid var(--rule);padding:10px;margin:0}
+.shot img{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges}
+.shot figcaption,figure figcaption{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.45}
+.shot figcaption{color:#b9bdb3}
+nav.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:4px 24px;padding-block:22px;border-bottom:1px solid var(--rule);font-family:var(--display);font-size:19px;font-weight:600}
+nav.toc a{color:var(--ink);text-decoration:none;display:flex;gap:10px}
+nav.toc a span{font-family:var(--mono);font-weight:400;font-size:13px;color:var(--muted);padding-top:4px;min-width:1.6em}
+nav.toc a:hover{color:var(--accent)}
+section{padding-block:34px 8px;border-bottom:1px solid var(--rule)}
+h2{font-family:var(--display);font-weight:700;font-size:40px;line-height:1;text-transform:uppercase;letter-spacing:.01em;margin:0 0 16px;display:flex;gap:14px;align-items:baseline;text-wrap:balance}
+h2 .n{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--accent);letter-spacing:0}
+h3{font-family:var(--display);font-weight:600;font-size:24px;margin:28px 0 8px;text-transform:uppercase;letter-spacing:.02em;text-wrap:balance}
+p,li{max-width:42em}
+p{margin:0 0 14px}
+ul,ol{padding-left:1.3em;margin:0 0 14px}
+li{margin-bottom:5px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+code,.mono{font-family:var(--mono);font-size:.86em}
+code{background:var(--code-bg);padding:1px 5px;border-radius:3px}
+kbd{font-family:var(--mono);font-size:.82em;background:var(--key-bg);border:1px solid var(--rule);border-bottom-width:3px;border-radius:4px;padding:0 6px;white-space:nowrap;color:var(--ink)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.two.wide-left{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.tbl{overflow-x:auto;margin:6px 0 18px;border-top:2px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:15.5px}
+th,td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:14px}
+td.k{white-space:nowrap}
+.note{background:var(--panel);padding:14px 18px;margin:8px 0 18px;max-width:46em;border-radius:2px}
+.note b:first-child{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px;color:var(--muted);font-weight:500}
+.compass{display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:4px;margin:6px 0 10px}
+.compass div{display:grid;place-items:center;font-family:var(--mono);font-size:20px;font-weight:500;background:var(--key-bg);border:1px solid var(--rule);border-bottom-width:3px;border-radius:5px}
+.compass .c{background:transparent;border:none;font-size:12px;color:var(--muted)}
+.compass-row{display:flex;flex-wrap:wrap;gap:28px;align-items:center}
+.compass-row p{margin:0}
+.icon{width:32px;height:32px;display:block;border:1px solid var(--rule)}
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px 22px;margin:10px 0 18px}
+.legend div{display:flex;gap:10px;align-items:center;font-size:15px;line-height:1.3}
+.legend small{display:block;color:var(--muted);font-size:13px}
+.unitname{display:flex;gap:10px;align-items:center;font-weight:600}
+figure{margin:0}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin:10px 0 18px}
+footer{padding-block:28px;font-size:14px;color:var(--muted)}
+@media (max-width:760px){
+  header.cover,.two,.two.wide-left{grid-template-columns:minmax(0,1fr);gap:24px}
+  h2{font-size:32px}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+.art{margin:0;border:1px solid var(--rule);background:#000}
+.art img{display:block;width:100%;height:auto;image-rendering:auto}
+/* optional: collapsible spoilers (<details class="spoiler"><summary>...</summary>...</details>) */
+details.spoiler{border:1px solid var(--rule);border-left:4px solid var(--red);padding:10px 16px;margin:10px 0 18px;max-width:46em;background:var(--panel)}
+details.spoiler summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:20px;text-transform:uppercase;letter-spacing:.02em}
+details.spoiler[open] summary{margin-bottom:10px}
+.sectormap{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;overflow-x:auto;font-size:13px;line-height:1.5;white-space:pre}
+</style>
+
+<div class="wrap">
+<header class="cover">
+  <div>
+    <div class="eyebrow">Timex/Sinclair 2068 · David Anderson · 2026</div>
+    <h1>SpaceTrader</h1>
+    <p class="lede">You own a free trader and owe the bank twenty thousand credits for her. Buy low, sell high, and stay ahead of the payments. The cargo that pays best is the cargo customs are looking for.</p>
+    <div class="meta"><span>1 player</span><span>keyboard</span><span>Extended Color Mode</span><span>20 systems</span></div>
+    <p class="site"><a href="https://timexsinclair.com">timexsinclair.com</a></p>
+  </div>
+  <figure class="shot"><img src="data:image/png;base64,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" alt="title" width="512" height="384"><figcaption>Title screen.</figcaption></figure>
+</header>
+
+<nav class="toc" aria-label="Contents">
+  <a href="#loading"><span>1</span>Loading</a>
+  <a href="#screen"><span>2</span>The screen</a>
+  <a href="#trading"><span>3</span>Trading</a>
+  <a href="#sector"><span>4</span>The sector</a>
+  <a href="#contraband"><span>5</span>Contraband</a>
+  <a href="#heat"><span>6</span>Heat</a>
+  <a href="#customs"><span>7</span>Customs</a>
+  <a href="#pirates"><span>8</span>Pirates and patrols</a>
+  <a href="#port"><span>9</span>Port services</a>
+  <a href="#mortgage"><span>10</span>The mortgage</a>
+  <a href="#ending"><span>11</span>Winning and losing</a>
+  <a href="#tips"><span>12</span>Tips</a>
+  <a href="#about"><span>13</span>About this edition</a>
+</nav>
+
+<section id="loading">
+  <h2><span class="n">01</span>Loading the program</h2>
+  <div class="two wide-left">
+  <div>
+  <p>SpaceTrader is a single TAP file of about 110K. It holds the BASIC program, two blocks of machine code and data, a font, the title screen, and twenty system illustrations — forty blocks in all, loaded as you need them.</p>
+  <h3>From tape or an emulator</h3>
+  <ol>
+    <li>Set the machine to <strong>Timex TS2068</strong> or <strong>TC2068</strong>.</li>
+    <li>Open <code>spacetrader.tap</code>.</li>
+    <li>Type <kbd>LOAD ""</kbd> and press <kbd>ENTER</kbd>.</li>
+  </ol>
+  <p>The program starts itself. Press any key at the title screen, then type a name for your ship and press <kbd>ENTER</kbd>. Pressing <kbd>ENTER</kbd> on its own names her <em>Beowulf</em>.</p>
+  <div class="note"><b>Leave fast loading on</b>The program pulls its own blocks off the tape as it runs — code, data and a picture for every system you visit. In an emulator, leave tape traps or fast loading enabled or every jump will take a minute.</div>
+  <div class="note"><b>Don't use RUN</b><kbd>RUN</kbd> starts the program without reserving the memory it needs. Always let it start itself, or <kbd>GO TO 40</kbd> if you have stopped it.</div>
+  </div>
+  <figure class="shot"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAGACAIAAABUQk3oAAAE1ElEQVR4nO3b0Y6rIBAA0Lrp//+ym5u+mLhwQRikcs7TpuowUDeZEft6AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIyyRQ+w7/u/Ybat8PPj0aP8meXxz5FLRnnefNtnmo+fGqU2n17x86PMM9/UVbXrE72eve4f7vVz8/gA3OQ9Zph8/durgv4czdc40fXLMYfz373mey2rkfH75tMev5dj5PI1rO3Y2tcnej373j/cRQcAsKhBHUBJLdw3fr4PKH/G2iufe0XPtzb+bOdH+/Z8ZsufXnQAAIsa1AF8lD+jLzknFb/vmc9wfnIdFz8in3n2AK6pnW/Ed5TKp/b86NwYSQcAsKihHUB5H1D7fjfX1n+GSnm2fGaY78z3/2rf17PpAAAWdUMHMIN5ft+Y6ofyteFqb2X0+r3rU1ep/a2ekqt4Hh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQMb2Crbve274bfvz/NrPa+O3n38+s8V5lFT81DpEx++1/rWuxa+db3nkWrXxx8y31/9d+ecp0fcPeT//OQ7AQ73HDHOtYi256njOtatKtFc6Kb0qqb7xa0ePrtRqK8ra+cat/7X40fOdzbfk+Tw6AIBFDeoAyp9RHo/GVTG1+dSe/+1q1z96fVaLv9r9ttp856EDAFjUpHsAx6vy7wmMyee809BXRMx25es/zx5Ae/wx91uvPYAW8+wTzJDDmnQAAIsa1AG0iOsDronYn6h9v37l9Y8Wvf80g+Ps1vlmOdMBACzqtreAPu6qsGbLJy7/VJUX/ZZLxCglxsx3/FtAqauuzfd4NN8HXIs/z/1Ang4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIse37/veBbXs913HW5TO9dhXAnH7uTgCAe7xT9eyn2k3Vuee+4bsq4k+2qe7nLL8aAN9IBwCwdgdQXtGfa+GSOrolft/Pax0ztwcAPIkOAGBRHfYA8lV2S4U+w5P3426BPQDgSXQAAGt3ALXUwgDfTgcAsKiLvwSu/R3AtfPLn7/XzqIlH4Bn0AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvGr9AtUnGhIG2uBYAAAAAElFTkSuQmCC" alt="naming" width="512" height="384"><figcaption>Naming the ship. Enter alone gives <em>Beowulf</em>.</figcaption></figure>
+  </div>
+</section>
+
+<section id="screen">
+  <h2><span class="n">02</span>The screen</h2>
+  <div class="two wide-left">
+  <div>
+  <p>The top third of the screen is the world you are docked at. It stays there the whole time you are in port and changes when you jump.</p>
+  <p>Below it is the market. The header gives the system's name, its <strong>tech level</strong> and its <strong>law level</strong> — the two numbers that decide what everything costs and how much trouble you are in.</p>
+  <p>The <code>ST</code> column is what this port does with each good:</p>
+  <div class="tbl"><table>
+    <tr><th>Mark</th><th>Means</th><th>Effect on price</th></tr>
+    <tr><td class="k"><code>EX</code></td><td>The port exports it</td><td class="num">30% cheaper</td></tr>
+    <tr><td class="k"><code>IM</code></td><td>The port imports it</td><td class="num">40% dearer</td></tr>
+    <tr><td class="k"><code>--</code></td><td>Neither</td><td class="num">—</td></tr>
+  </table></div>
+  <p>An exclamation mark at the right of a line means that good is <strong>contraband here</strong>. The bottom line is always your credits, fuel, hull and heat.</p>
+  <h3>Choosing</h3>
+  <p>Each menu shows its keys with the letter in yellow. Press that letter. When a message appears it takes the place of the menu and shows in reverse — press any key to clear it and the menu comes back.</p>
+  </div>
+  <figure class="shot"><img src="data:image/png;base64,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" alt="market" width="512" height="384"><figcaption>The market at Coriolis Gate. Four goods are contraband here; weapons at 149 are the temptation.</figcaption></figure>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Key</th><th>Does</th><th>Notes</th></tr>
+    <tr><td class="k"><kbd>B</kbd></td><td>Buy</td><td>Asks which good, then how many tons.</td></tr>
+    <tr><td class="k"><kbd>S</kbd></td><td>Sell</td><td>Same. You cannot sell what you do not hold.</td></tr>
+    <tr><td class="k"><kbd>J</kbd></td><td>Jump</td><td>Lists the systems in reach.</td></tr>
+    <tr><td class="k"><kbd>P</kbd></td><td>Port services</td><td>Fuel, repairs, licenses, mortgage.</td></tr>
+  </table></div>
+</section>
+
+<section id="trading">
+  <h2><span class="n">03</span>Trading</h2>
+  <p>Buy where a good is exported and sell where it is imported. That is the whole engine. An exporter takes 30% off the base price and an importer adds 40%, so the spread on a full hold is real money.</p>
+  <p>Two other things move the price. A crowded world sells cheaper than an empty one, and a high-technology world sells its own manufactures cheaper than a backwater does. On top of all of it there is a swing of up to 15% either way, <strong>rolled afresh every time you dock</strong>. The same route pays differently each run, so a bad price is worth coming back for.</p>
+  <p>Your hold takes <strong>twenty tons</strong>. There is no part-load discount and no storage: everything you own is aboard.</p>
+  <div class="tbl"><table>
+    <tr><th>Good</th><th class="num">Base</th><th>Restricted above law</th></tr>
+    <tr><td>1 Foodstuffs</td><td class="num">20</td><td>—</td></tr>
+    <tr><td>2 Ore</td><td class="num">35</td><td>—</td></tr>
+    <tr><td>3 Textiles</td><td class="num">45</td><td>—</td></tr>
+    <tr><td>4 Medical</td><td class="num">90</td><td class="num">7</td></tr>
+    <tr><td>5 Electronics</td><td class="num">140</td><td class="num">6</td></tr>
+    <tr><td>6 Weapons</td><td class="num">180</td><td class="num">4</td></tr>
+    <tr><td>7 Machinery</td><td class="num">110</td><td>—</td></tr>
+    <tr><td>8 Luxuries</td><td class="num">250</td><td class="num">5</td></tr>
+  </table></div>
+  <p>The best single-jump run in the sector is luxuries from Ambergris into Junction Nine, which pays about 3,400 credits on a full hold. A typical profitable run pays about 1,200.</p>
+</section>
+
+<section id="sector">
+  <h2><span class="n">04</span>The sector</h2>
+  <div class="two wide-left">
+  <div>
+  <p>Twenty systems. You can jump to anything <strong>within two columns and two rows</strong>, so a world two squares away on the diagonal is still one jump. Fuel costs one ton plus one for every two squares of distance — one to three tons a jump, out of a tank that holds eight.</p>
+  <p>The sector runs core to frontier, left to right. The core is high technology and high law: cheap fuel, cheap repairs, no pirates worth the name, and inspectors everywhere. The frontier is the reverse. Nothing legal is worth much out there, but nothing is illegal either, and the pirates know it.</p>
+  <p>Everything is reachable from Coriolis Gate, but not quickly. Ossuary and Vagrant are six jumps out, and <strong>Ossuary connects only through Kalideen</strong> — if you want the weapons there, you commit to the trip.</p>
+  <div class="note"><b>No refuelling in deep space</b>There is nowhere to buy fuel between systems. Check the tank before a long leg; being stranded with an empty hold and no credits ends the game.</div>
+  </div>
+  <figure class="shot"><img src="data:image/png;base64,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" alt="jump" width="512" height="384"><figcaption>Jumping from Coriolis Gate. <code>F</code> is the fuel cost.</figcaption></figure>
+  </div>
+<pre class="mono sectormap">        CORE  &lt;--------------------------------&gt;  FRONTIER
+
+          1   2   3   4   5   6   7   8   9  10  11  12  13
+   2      ·   ·   3   ·   9   ·   ·   ·   ·   ·  20   ·   ·
+   3      ·   ·   ·   ·   ·  11   ·   ·  15   ·   ·   ·  17
+   4      ·   1   ·   ·   6   ·   ·   ·   ·   ·   ·   ·   ·
+   5      ·   ·   ·  12   ·   ·  10   ·   ·  14   ·   ·   ·
+   6      2   ·   5   ·   ·   ·   ·   ·   ·   ·   ·  16   ·
+   7      ·   ·   ·   7   ·   ·   ·  13  18   ·   ·   ·   ·
+   8      ·   4   ·   ·   ·   8   ·   ·   ·   ·  19   ·   ·
+</pre>
+  <div class="tbl"><table>
+    <tr><th class="num">#</th><th>System</th><th class="num">TL</th><th class="num">Law</th><th>Exports</th><th>Imports</th></tr>
+    <tr><td class="num">1</td><td>Coriolis Gate</td><td class="num">15</td><td class="num">8</td><td>Elec Mach</td><td>Ore Food</td></tr>
+    <tr><td class="num">2</td><td>Meridian</td><td class="num">14</td><td class="num">9</td><td>Med Elec</td><td>Ore Text</td></tr>
+    <tr><td class="num">3</td><td>Verity</td><td class="num">14</td><td class="num">7</td><td>Mach Elec</td><td>Ore Food Text</td></tr>
+    <tr><td class="num">4</td><td>Tessellate</td><td class="num">13</td><td class="num">6</td><td>Lux</td><td>Food Text Med</td></tr>
+    <tr><td class="num">5</td><td>Aldebar Prime</td><td class="num">13</td><td class="num">6</td><td>Elec Weap Mach</td><td>Ore Food</td></tr>
+    <tr><td class="num">6</td><td>Junction Nine</td><td class="num">10</td><td class="num">5</td><td>Mach</td><td>Food Lux</td></tr>
+    <tr><td class="num">7</td><td>Hollow Sky</td><td class="num">8</td><td class="num">4</td><td>Food Text</td><td>Mach Med</td></tr>
+    <tr><td class="num">8</td><td>Kestrel</td><td class="num">9</td><td class="num">5</td><td>Food</td><td>Elec Mach</td></tr>
+    <tr><td class="num">9</td><td>Ambergris</td><td class="num">11</td><td class="num">4</td><td>Lux Text</td><td>Food Mach</td></tr>
+    <tr><td class="num">10</td><td>Tannhauser</td><td class="num">11</td><td class="num">5</td><td>Elec Mach</td><td>Ore Food</td></tr>
+    <tr><td class="num">11</td><td>Fenwick</td><td class="num">8</td><td class="num">3</td><td>Ore</td><td>Food Med Mach</td></tr>
+    <tr><td class="num">12</td><td>Pellucid</td><td class="num">12</td><td class="num">6</td><td>Med Elec</td><td>Food Text Lux</td></tr>
+    <tr><td class="num">13</td><td>Sable Run</td><td class="num">9</td><td class="num">3</td><td>Text</td><td>Elec Med</td></tr>
+    <tr><td class="num">14</td><td>Rust Harbour</td><td class="num">6</td><td class="num">1</td><td>Ore Weap</td><td>Food Med Elec</td></tr>
+    <tr><td class="num">15</td><td>Cinder</td><td class="num">5</td><td class="num">2</td><td>Ore</td><td>Food Med Mach</td></tr>
+    <tr><td class="num">16</td><td>Vagrant</td><td class="num">6</td><td class="num">0</td><td>Weap Lux</td><td>Food Med Mach</td></tr>
+    <tr><td class="num">17</td><td>Ossuary</td><td class="num">4</td><td class="num">1</td><td>Ore Weap</td><td>Food Med Text</td></tr>
+    <tr><td class="num">18</td><td>Longshot</td><td class="num">5</td><td class="num">2</td><td>Ore Food</td><td>Elec Mach Med</td></tr>
+    <tr><td class="num">19</td><td>Threadbare</td><td class="num">4</td><td class="num">3</td><td>Food Text</td><td>Elec Mach Med</td></tr>
+    <tr><td class="num">20</td><td>Kalideen</td><td class="num">7</td><td class="num">2</td><td>Ore Text</td><td>Elec Weap Med</td></tr>
+  </table></div>
+</section>
+
+<section id="contraband">
+  <h2><span class="n">05</span>Contraband and licenses</h2>
+  <p>Four goods are restricted, and the higher a world's law level the more it cares. A good is contraband anywhere whose law level is <em>above</em> its threshold.</p>
+  <div class="tbl"><table>
+    <tr><th>Good</th><th class="num">Threshold</th><th class="num">Illegal in</th><th class="num">License</th></tr>
+    <tr><td>Weapons</td><td class="num">4</td><td class="num">9 of 20</td><td class="num">1,440</td></tr>
+    <tr><td>Luxuries</td><td class="num">5</td><td class="num">6 of 20</td><td class="num">2,000</td></tr>
+    <tr><td>Electronics</td><td class="num">6</td><td class="num">3 of 20</td><td class="num">1,120</td></tr>
+    <tr><td>Medical</td><td class="num">7</td><td class="num">2 of 20</td><td class="num">720</td></tr>
+  </table></div>
+  <p>Buying contraband adds 2 to your heat. Carrying it is what customs are looking for.</p>
+  <p>A <strong>license</strong>, bought at any port, stops that good being contraband for you anywhere at all — the exclamation mark disappears from the market screen and customs stop caring. It is the expensive way to do what heat does cheaply and dangerously.</p>
+  <div class="note"><b>Which license first</b>Weapons is illegal in nine systems and costs 1,440. Luxuries is illegal in six and costs 2,000 but the goods themselves are worth far more. Medical at 720 is cheap because it is barely restricted at all.</div>
+</section>
+
+<section id="heat">
+  <h2><span class="n">06</span>Heat</h2>
+  <p>Heat is how much official attention you have attracted. It is the thread that ties the rest of the game together, and it makes three things worse at once: customs inspect you more often, pirates find you more often, and bribes become less likely to work.</p>
+  <div class="tbl"><table>
+    <tr><th>What you do</th><th class="num">Heat</th></tr>
+    <tr><td>Buy a ton of contraband</td><td class="num">+2</td></tr>
+    <tr><td>Surrender cargo to customs</td><td class="num">+1</td></tr>
+    <tr><td>Pay a fine</td><td class="num">+4</td></tr>
+    <tr><td>Offer a bribe that is refused</td><td class="num">+8</td></tr>
+    <tr><td>Resist an inspection</td><td class="num">+15</td></tr>
+    <tr><td>Every jump</td><td class="num">−1</td></tr>
+  </table></div>
+  <p>There is no way to pay heat off. The only cure is time: jump, trade clean, and let it fall. A run of quiet jumps is worth making before a big smuggling trip, not after.</p>
+</section>
+
+<section id="customs">
+  <h2><span class="n">07</span>Customs</h2>
+  <div class="two wide-left">
+  <div>
+  <p>You are inspected when you arrive at a port, and sometimes stopped in transit by a patrol. The chance depends on the world's law level, plus a fifth of your heat, and never exceeds 70%. A patrol stopping you in transit is half as likely to inspect as a port is.</p>
+  <div class="tbl"><table>
+    <tr><th>Where</th><th class="num">Base chance</th></tr>
+    <tr><td>Frontier, law 0–2</td><td class="num">10%</td></tr>
+    <tr><td>Middle band, law 3–5</td><td class="num">25%</td></tr>
+    <tr><td>Core, law 6 and up</td><td class="num">45%</td></tr>
+  </table></div>
+  <p>If the hold is clean you are waved through. If it is not, you choose:</p>
+  </div>
+  <figure class="shot"><img src="data:image/png;base64,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" alt="customs" width="512" height="384"><figcaption>Caught with six tons. The fine is 40 credits a ton.</figcaption></figure>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Key</th><th>Choice</th><th>What it costs</th></tr>
+    <tr><td class="k"><kbd>C</kbd></td><td>Comply</td><td>40 credits a ton, the cargo, and 4 heat.</td></tr>
+    <tr><td class="k"><kbd>B</kbd></td><td>Bribe</td><td>70% less your heat, never below 20%. It works and nothing happens at all; it fails and you pay double the fine, lose the cargo anyway, and take 8 heat.</td></tr>
+    <tr><td class="k"><kbd>S</kbd></td><td>Surrender</td><td>The cargo and 1 heat. No fine.</td></tr>
+    <tr><td class="k"><kbd>R</kbd></td><td>Resist</td><td>A fight with a patrol cutter, which is tougher than a pirate, and 15 heat whichever way it goes.</td></tr>
+  </table></div>
+  <p>Surrendering is usually right when you are caught cold: you lose the goods either way, and the fine and the heat are what hurt. Bribing is a gamble that gets worse exactly when you most want it to work, because the odds fall as your heat rises.</p>
+</section>
+
+<section id="pirates">
+  <h2><span class="n">08</span>Pirates and patrols</h2>
+  <div class="two wide-left">
+  <div>
+  <p>Every jump rolls for an encounter against the law level of where you are going. Heat is added to both the pirate and the patrol chance.</p>
+  <div class="tbl"><table>
+    <tr><th>Destination</th><th class="num">Pirate</th><th class="num">Patrol</th><th class="num">Offer</th></tr>
+    <tr><td>Frontier, law 0–2</td><td class="num">25%</td><td class="num">2%</td><td class="num">15%</td></tr>
+    <tr><td>Middle, law 3–5</td><td class="num">12%</td><td class="num">8%</td><td class="num">15%</td></tr>
+    <tr><td>Core, law 6+</td><td class="num">3%</td><td class="num">20%</td><td class="num">12%</td></tr>
+  </table></div>
+  <p>A trade offer is simply money — a cargo contract worth 50 to 200 credits, paid on the spot.</p>
+  <p>Nobody kills you outright. A fight costs cargo and hull, and the run ends only if the hull reaches zero.</p>
+  </div>
+  <figure class="shot"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAGACAIAAABUQk3oAAAMXklEQVR4nO3d4ZKjqBYA4M5Unmjy/o+QfaVsVWe21m4bB0QEPN/3Y+9eYxCJvZyjgLfn8/kBQDy/elcAgD50AABB6QAAgtIBAASlAwAISgcAEJQOACAoHQBAUDoAgKB0AABB6QAAgtIBAASlAwAISgcAEJQOACAoHQBAUDoAgKB0AABB6QAAgtIBAASlAwAI6t67AsBUHtl7PpvWgwPIAACCkgHA0R7/B8m/C7/6T/HBnmfH2uL6C5EBAAQlA4DiuH5nRP98NqjDo/C+/HOstjqnPiTIAACCkgHAPHFr6XHXZ7R9jvvO612mWH5CMgCAoGQAxNMiCs46Sk7Jj59r8tjcnlPnVGnFOdC7nERuIQ+YigwAIKjbU4/NVZ0T6efX4X3EVCzf4rg15bdrvXNagAwyAICgZABcRSpinSXGXMfs+yLl95ee2dtzapW677+2rucIeRgJMgCAoGQAzGn2eL/eOqLfzhi2nwqUfrdmzoTxQsOQAQAEJQNgBifG+/tulU8gJ2ZvNwfizBFQZJMBAARlJvBlTR/JpqLIxp7XaL2+SscC0YkMACAoGcDFTRPJDjmqZ5rWG78F1iOIPA8YgAwAICgZAOHu8of22cKPVct3WBNsOS7IldCJDAAgKBnApawjuz/bP//ZeeXXP1UbMepPtdufTz//Of+6uUPWPzW72BOCU8gAAIKSAUxvO3pd73lqJJt6K9YwweijtJ0/W2+Y6hd5jD4cPzV7QDbQjAwAICgZwGT+u5G+P5BrPgJk+BEd+TnTj1/+ljfM/2xgYGYPNCYDAAjKaqDTqIpbs+2MZ68d9WcbOht4305PPPV417y0laqulmPfVzxyyw/p3YIyAICgPAOYwDnR6/JYBZHd8CM0zm+9UbOBzXYYenjQx9/fLrB5HeZf1Y+cg58yym75tK++zC9PrRb/LgMACEoGwBfPS0T958f+s+vbUjtj5+1ZxO+nGsuj5BT5sbXnduw/gsS8m2TNZQAAQckAyGPcBfPOGFhuT33r02NXfN3CMhepyS+S3/1sDRkAQFAygKF1u7c45Pu55jLa28RGuUt93JOA5BktSnhOeyU/vvyf41fxMg8AIDQZwKB6xf7J8Q/DR0yjjcdYrhrUovVSr1fY2HdAX2q2Grez9kzcJX/mzxg4ajZyY1/Orlk9PQMACEoGMJyBYthp5riOrsmbGIa8Toqtxu+XttJz11/Ts9nYtkf1b/048U0eMgCAoO5VUYZIEALnhQdIjMSvj3Ufm/+N+nOUR8V7NU45i2XJqfV8alpGBgAQ1N/eB5DTQ46TB4yZr+waiTxyxDfyM4Ax221fi415Lj8ovWv/Hh81zFX0TLRzVg1Llw3KUbMkaWH5MgCAoObMABa1+l341X8a1/93YdT2Q30+jRn7jRz7jxw1l7bbmGfB9cgAAIKqmwdwZjzYLiaaZHX7KbVbEGeqGLndOG6oIQMACKouAxh+PQ2aR7I5kfj2y2h3XT9zXXPJeafQlQwAIKh7aVTyw6ibzRJSo1wGJUbbtlqvsWo4cs16KZ/frZnJCcgAAIK6l46jL9W6/FLqU2MdsR8wD2NfTTZXeRwtL/hd2D7rdh7tjLgGGQBAULe5RlPEMWbEtx2Zll5LvZZRAd5kAAAAAAAAAAAXYhQQDGS0eSofjed5zH6+szMKCCCo26t3DQDoQgYAEJQOACAoHQBAUDoAgKB0AABB6QAAgtIBAASlAwAISgcAEJQOACAoHQBAUDoAgKB0AABB6QAAgtIBAASlAwAISgcAEJQOACAoHQBAUDoAgKB0AABB6QAAgtIBAASlAwAISgcAEJQOACAoHQBAUDoAgKB0AABB6QAAgtIBAASlAwAISgcAEJQOACAoHQBAUDoAgKB0AABB6QAAgtIBAASlAwAISgcAENQ99cFt82uv7P1fncpPfat0/33y69+6PV+b7VDfPqPtv09p+99Ovx5yatXieigtn7nIAABiZwClEcGtMBoqjUDzty+31NTnKEedV0775+9fKr+c0vaf/fdqXf6+45b+Pdbveez1Ri8yAIDYGUDre3yj3UM8vz5ztaffq9f1uYzl19tbHGVfyWL/a5ABAASVfAZwrPWd3205+9SYPX4pbc+a8kcwWn1aO+eeeyrb2PYK/LtcjwwAIKjkPIB2cu4/lo4HH1+7URPb7bn+1PiNHL1a6fzjluYB+/IGxiQDAAhqZwaw7P9njCj3zU9uMYpjzFEf7dpn9t+rtD7nXA/t/h7PuT7pRQYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnOrW+gCv12vr8Lfbj/uXbs8vP/Wt/D239y+173zrt5fW51j57Q+086th2QAM7N76AMvIrl10WVrme//8+tRH1mg3GI0MACCo5hnAPtt39nP2PzY2P7/8a/MMAEYgAwAIatAM4KjRPi3q0yJaLz3f2XmmAiOQAQAENWgGMLLSEUQAY5IBAAR1kQygdL7ucv+5Yvll/rHe3qJ98o/Srv5ACzIAAAAAAAAAgAs56X0ApTM/S9frr39/gPX9z9F3RjewZBQQQFAnvQ9gGY/nxP6t14qxFk0vpTMPgHZkAABB3WOun2N9/3GMc1VANDIAgKAushZQKev7j0DsD33JAACCCpoBjPx8AuAcMgCAoIbLAErXi599ffnZ1/cH5iUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANhw+zjF6/X6fuDb7ZD913seW/6+/UvVn+9RterVnqlvvffM314jv8x218O+37f0+iltz31XBeP71bsCAPRxb32A0ohjX4TSrvzWEWhp+cstLaLg9VFyjvXenlOf+jq3i/1rjn5UrUp/35qIPj/XEelflQwAIKjmGUBKr3vo59Rndu3ucS9zhfzyl/u3y3hy8oB99R9NfsZ2jfMlRQYAEFS3DOCoe7KpO6f7jtUrrimtc2s17Vlafukznr53pc8cldRaad4z+/myJgMACKpbBrBvVM+x9zfX+/dSc76tlbbntvpyjq0P29e/dr42GQBAUM0zgNFGEZTWZ7T6j2nZPvkzBtbbe5m3/q3rM9r5ciwZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHCqW+sDvF6bh18d//X5hdvqg9T25adfS87dc9/+29/iqOsh9Stst3zp9ZB/vbkeuJJfvSsAQB/3cw7TLlDelzHU70+N0uZ8t//2b1RzPZTW5NgyoRcZAEBQ9153fucKm0rvQfO39vy+pXVzlj4zgAhkAABBTf8M4JwITrx/dHt+nGZ5bZQ+E4JrkwEABHVSBlAz3iNnrIUIjpwrCliSAQAE1W0U0FsqrM+P/ffWp3Zmac63OMqy/XNmbBi1BTlkAAAAAAAAAAAX0u19APkrv7dY/z2/fOu/j3A9lK7X3241ULgSo4AAguq2FtA7EtyeB/B1/9zR3zlRnvcB9FV6PZQS70MOGQBAUIO+D6D1TM5275glr/2/bzm2OVvPJIdrkAEABDXBM4AW6zh6BtDX8ndvt0yndUBhmwwAIKjh3gew5n7utb2zgWNHAX0t3/sA4GcyAICgBh0F1G69+PX+/9XH+wBGZH1/aEcGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJzq9v6f1+v1/YPbn4++We+5vX+N97FySs6v/zn750u1Z+ooqTbZ3l5ffjvHHnFf+9RvL63PUUp/333lt7vejvrvz/a3Sr2a/b2P5lfvCgDQx31fpNM6ctzu53OO2277e8ux59s6vhgzfsn/lUnZFym3Vp8hpbav/xKPvbZfB2V+s5ABAAR1T33Q6574srQWUUyq5PwnDS3q1ro9R7un2a4ll+XH1C4urtn/erHzNcgAAIJKZgDb1nfieimNIvfd42t9BzDOM4Bz7qWWjk65hnZte9Ron5Rxfp1bs6x0TDIAgKDu9dHEss/sFWm2jvjGiaCvYf3rXHWUBTNmbLfB6tOODAAgqHvNqJh2lvXJiQ3z6196vqO1z776lM7fbjffe7QR1rO355hmP9/XMH/vrckAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgI/+/gXgkmrf9xji9gAAAABJRU5ErkJggg==" alt="combat" width="512" height="384"><figcaption>A pirate off Rust Harbour. Their hull against yours, plus a die roll each.</figcaption></figure>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Key</th><th>Choice</th><th>What happens</th></tr>
+    <tr><td class="k"><kbd>E</kbd></td><td>Evade</td><td>50% plus 3 for every ton of fuel aboard. A full tank is a fast ship.</td></tr>
+    <tr><td class="k"><kbd>F</kbd></td><td>Fight</td><td>Your hull against theirs, each plus a roll of six. Win and they break off; lose and you take one or two hull and lose cargo.</td></tr>
+    <tr><td class="k"><kbd>B</kbd></td><td>Bribe</td><td>200 credits, 60% less your heat, never below 15%.</td></tr>
+    <tr><td class="k"><kbd>R</kbd></td><td>Run</td><td>The same odds as evading.</td></tr>
+  </table></div>
+  <div class="note"><b>Fuel is armour</b>Evading improves by 3% a ton, so a ship that has just filled her tanks escapes about three times in four. One that is nearly dry escapes about half the time — and cannot jump away afterwards either.</div>
+</section>
+
+<section id="port">
+  <h2><span class="n">09</span>Port services</h2>
+  <div class="two wide-left">
+  <div>
+  <p>Press <kbd>P</kbd> at the market. The screen is headed with your ship's name.</p>
+  <div class="tbl"><table>
+    <tr><th>Key</th><th>Buys</th></tr>
+    <tr><td class="k"><kbd>F</kbd></td><td>One ton of fuel.</td></tr>
+    <tr><td class="k"><kbd>A</kbd></td><td>Fuel until the tank is full or the money runs out.</td></tr>
+    <tr><td class="k"><kbd>H</kbd></td><td>One point of hull.</td></tr>
+    <tr><td class="k"><kbd>L</kbd></td><td>Trade licenses.</td></tr>
+    <tr><td class="k"><kbd>M</kbd></td><td>1,000 off the mortgage.</td></tr>
+    <tr><td class="k"><kbd>X</kbd></td><td>Back to the market.</td></tr>
+  </table></div>
+  <p>Both the tank and the hull hold eight. Technology decides the price:</p>
+  <div class="tbl"><table>
+    <tr><th>Tech level</th><th class="num">Fuel/ton</th><th class="num">Hull/point</th></tr>
+    <tr><td>15, the core</td><td class="num">10</td><td class="num">40</td></tr>
+    <tr><td>9, the middle band</td><td class="num">22</td><td class="num">64</td></tr>
+    <tr><td>4, the frontier</td><td class="num">32</td><td class="num">84</td></tr>
+  </table></div>
+  </div>
+  <figure class="shot"><img src="data:image/png;base64,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" alt="port" width="512" height="384"><figcaption>Port services. The debt and the next payment are always in view.</figcaption></figure>
+  </div>
+  <p>A core world repairs a battered hull for half what a frontier yard charges. It is also where your contraband is most likely to be found, which is the whole difficulty of the game in one sentence.</p>
+</section>
+
+<section id="mortgage">
+  <h2><span class="n">10</span>The mortgage</h2>
+  <p>You start owing <strong>20,000 credits</strong>. Every eight jumps, <strong>800</strong> falls due and is taken automatically if you have it. The port screen always shows the balance and how many jumps remain before the next payment.</p>
+  <p>Miss one and you get a warning. <strong>Miss two and the ship is repossessed.</strong></p>
+  <p>Paying only the minimum takes two hundred jumps. Paying down the principal with <kbd>M</kbd> after a good run clears it in a handful. That is the shape of the game: the minimum keeps you flying, the profits buy you out.</p>
+  <div class="note"><b>Keep 800 in hand</b>A fine, a bribe or a boarding can empty your account at exactly the wrong moment. Going into the eighth jump broke is how most ships are lost — not to pirates, but to the bank.</div>
+</section>
+
+<section id="ending">
+  <h2><span class="n">11</span>Winning and losing</h2>
+  <p>Clear the debt and the ship is yours. That is the end of the game and the only way to win it.</p>
+  <h3>Three ways to lose</h3>
+  <ul>
+    <li><strong>Your hull reaches zero</strong> in a fight.</li>
+    <li><strong>You miss two payments</strong> and the bank takes her.</li>
+    <li><strong>You are stranded</strong> — no fuel, nothing in the hold to sell, and not enough credits to buy a single ton.</li>
+  </ul>
+  <p>The third is the quiet one. Nothing warns you. Do not spend your last credits on cargo you have no fuel to move.</p>
+</section>
+
+<section id="tips">
+  <h2><span class="n">12</span>Tips</h2>
+  <ul>
+    <li><strong>Run the core first.</strong> Electronics and machinery out of Coriolis Gate, Verity and Tannhauser pay well and legally, and the core is almost free of pirates. Build a few thousand before you go looking for trouble.</li>
+    <li><strong>Buy the weapons license before the weapons.</strong> Nine systems forbid them. One inspection at a core world costs more than the license did.</li>
+    <li><strong>Watch the market, not the good.</strong> Prices reroll every docking, so a 15% swing can be worth more than choosing a different cargo. If a price is poor, sell part of the hold and come back.</li>
+    <li><strong>Fill the tank before a frontier run.</strong> Fuel is cheapest in the core, it is your escape chance in a fight, and there is nowhere to buy it out there.</li>
+    <li><strong>Let heat fall before the big trip.</strong> Heat is added to the pirate chance <em>and</em> the inspection chance <em>and</em> taken off your bribe odds. Four or five clean jumps before a smuggling run is time well spent.</li>
+    <li><strong>Surrender rather than bribe when you are hot.</strong> Bribe odds are 70% less your heat. At 30 heat it is a 40% chance of nothing against a 60% chance of double the fine and 8 more heat.</li>
+    <li><strong>Pay the principal the moment you can.</strong> A thousand off the debt is worth more than a thousand in the account, because the account is what fines and pirates take.</li>
+  </ul>
+</section>
+
+<section id="about">
+  <h2><span class="n">13</span>About this edition</h2>
+  <p>SpaceTrader was written in 2026 for the Timex Sinclair 2068, in Sinclair BASIC with Z80 machine code for the display work. It is not a port of anything; the setting takes its shape from the <em>Traveller</em> role-playing game, whose free traders are also mortgaged.</p>
+  <h3>How it uses the machine</h3>
+  <p>The whole game runs in the TS2068's <strong>Extended Color Mode</strong>, a feature almost nothing in 1983 used. It gives one attribute byte for every 8×1 strip of pixels instead of every 8×8 block — eight times the vertical color resolution of a standard Spectrum display, at the cost of a second 6K bitmap.</p>
+  <p>That is why the system art and the text can share a screen without the colour clash this machine is otherwise known for, and why a rule under the art can be a single pixel tall. The mode is entered once at the start and never left, because the ROM routine that is supposed to leave it does not work.</p>
+  <p>The twenty system illustrations are 2,048-byte band images occupying the top third of the screen — a third the size of a full screen, and a third the loading time. The font is drawn for this program and deliberately leaves the top pixel row of every character empty, so the rule has a clear line to sit on.</p>
+  <h3>Credits</h3>
+  <p class="credits">Program and artwork by David Anderson, written with Claude (Anthropic). Released under the MIT license; source, tools and build scripts at <a href="https://github.com/factus10/SpaceTrader">github.com/factus10/SpaceTrader</a>.</p>
+  <p class="credits">Jon Becker's TS2068 ECMViewer showed that Extended Color Mode was usable at all, and that the mode change has to go through the ROM rather than a bare <code>OUT</code>. Artwork was converted with Retro Pixel Converter. The TS2068 reference library and ROM disassemblies supplied the memory map.</p>
+</section>
+
+<footer>
+  <p class="colophon">SpaceTrader · Timex/Sinclair 2068 · 2026 · <a href="https://timexsinclair.com">timexsinclair.com</a></p>
+</footer>
+</div>

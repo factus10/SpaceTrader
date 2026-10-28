@@ -33,6 +33,7 @@ docs/sector-table.md      generated human-readable sector table
 docs/memory-map.md        the TS2068 memory map, ECM, and what it costs
 docs/ui-layout.md         screen layout and the attribute addressing
 docs/how-to-play.md       player's guide, with a sector map
+manual/                   the printed manual: HTML, half-letter zine, duplex booklet
 midjourney/               art prompt generation (subjects live in data/systems.json)
 art/                      4:1 source images, one per system
 art/ui/font.bin           the game font, drawn by tools/make_font.py
@@ -85,6 +86,16 @@ second corrupts the display with the filename text on a standard machine.
 Each image is ~12 KB; twenty systems is ~240 KB, trivial against the TS-Pico's storage.
 Images are displayed full-screen and discarded before returning to the standard-mode UI —
 never windowed alongside it.
+
+## The manual
+
+[`manual/`](manual/) holds a 16-page manual in three forms: a self-contained HTML file,
+a half-letter PDF, and a duplex-print booklet. To print the booklet, use letter paper,
+double-sided, flipping on the short edge, then fold and staple on the fold.
+
+Its screenshots are composed by [`tools/render_screens.py`](tools/render_screens.py) from
+the game's own font, art planes and layout constants rather than captured from an
+emulator, so they regenerate exactly after a change.
 
 ## License
 

@@ -18,3 +18,6 @@ art/ui/helvet.tap
 
 # z80asm object files
 *.o
+
+# Manual build intermediates
+manual/previews/
