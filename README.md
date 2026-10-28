@@ -52,6 +52,11 @@ That assembles the Z80, draws the font, converts the art, checks the BASIC, toke
 and assembles the TAP — refusing to finish if the program has outgrown the space ECM
 needs or if two CODE blocks would land on top of each other.
 
+It then boots the finished TAP in ZEsarUX and drives it as far as the market screen.
+The static checks do not catch everything: a program slightly too large passes all of
+them and still wedges the machine before the title, with nothing on the build output to
+say so. The boot check skips with a notice if ZEsarUX is not installed.
+
 ## Running it in an emulator
 
 > **Turn tape auto-rewind on.** Each system's art is a separate named CODE block, and the
