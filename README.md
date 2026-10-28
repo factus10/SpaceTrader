@@ -52,6 +52,22 @@ That assembles the Z80, draws the font, converts the art, checks the BASIC, toke
 and assembles the TAP — refusing to finish if the program has outgrown the space ECM
 needs or if two CODE blocks would land on top of each other.
 
+## Running it in an emulator
+
+> **Turn tape auto-rewind on.** Each system's art is a separate named CODE block, and the
+> ROM loader only ever searches *forward* down the tape. The TS-Pico mounts the TAP as a
+> loop, so a block the head has already gone past comes round again — the game is written
+> on that assumption. An emulator's tape normally just ends. Jump to a lower-numbered
+> system than the one whose art loaded last and the loader runs off the end hunting for a
+> block behind it: it sits showing `Bytes: a10` while it looks for `a2`, and never comes
+> back. In ZEsarUX the flag is `--autorewind`, which restores the looping behaviour:
+>
+> ```bash
+> zesarux --machine TS2068 --autorewind build/spacetrader.tap
+> ```
+>
+> Other emulators need whatever their equivalent is; Fuse has not been checked for this.
+
 ## Working with the sector data
 
 `data/systems.json` is the single source of truth. Everything else is generated:
