@@ -52,6 +52,10 @@ That assembles the Z80, draws the font, converts the art, checks the BASIC, toke
 and assembles the TAP — refusing to finish if the program has outgrown the space ECM
 needs or if two CODE blocks would land on top of each other.
 
+Numeric literals are rewritten into cheaper forms on the way to the shipped build —
+Sinclair stores every literal as its digits plus a 5-byte float, so they were 40% of the
+program. The source keeps the plain numbers, the same way it keeps its comments.
+
 It then boots the finished TAP in ZEsarUX and drives it as far as the market screen.
 The static checks do not catch everything: a program slightly too large passes all of
 them and still wedges the machine before the title, with nothing on the build output to
