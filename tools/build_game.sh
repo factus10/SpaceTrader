@@ -99,6 +99,13 @@ python3 tools/check_layout.py build/spacetrader.tap
 echo "9. memory check"
 python3 tools/check_fit.py build/basic_only.tap
 
+# check_fit only models CHNG_VID's STKEND + $1B00 <= RAMTOP test, and that is
+# not the constraint that bites first - a program slightly too large passes it
+# and still wedges the machine before the title screen, silently. Boot it.
+echo
+echo "10. boot check"
+python3 tools/check_boot.py build/spacetrader.tap
+
 
 echo
 ls -l build/spacetrader.tap
