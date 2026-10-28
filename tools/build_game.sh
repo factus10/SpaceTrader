@@ -40,8 +40,13 @@ python3 tools/strip_rem.py build/spacetrader_full.bas -o build/spacetrader_ship.
 echo "5. checking"
 python3 tools/check_basic.py build/spacetrader_ship.bas --art-band
 
+# After the checks, so they see real line numbers and real PRINT AT rows, and
+# only the shipped file is rewritten. Literals are 40% of the program.
+echo "5a. packing numeric literals"
+python3 tools/pack_numbers.py build/spacetrader_ship.bas -o build/spacetrader_packed.bas
+
 echo "6. tokenizing"
-zmakebas -n spacetrdr -a 40 -o build/basic_only.tap build/spacetrader_ship.bas
+zmakebas -n spacetrdr -a 40 -o build/basic_only.tap build/spacetrader_packed.bas
 
 echo "6a. font"
 python3 tools/make_font.py >/dev/null
